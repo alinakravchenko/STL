@@ -10,6 +10,8 @@
 #include<array>
 #include<vector>
 #include<deque>
+#include<list>
+#include<iterator>
 //using namespace std;
 using std::cin;
 using std::cout;
@@ -17,7 +19,9 @@ using std::endl;
 #define tab "\t"
 //#define ARRAY
 //#define VECTOR
-#define DEQUE
+//#define DEQUE
+//#define LIST
+//#define LIST2
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -119,4 +123,60 @@ void main()
 		cout << *it << tab;
 	cout << endl;
 #endif //DEQUE
+#ifdef LIST
+	std::list<DataType>list = { 3,5,8,13,21, 54, 140, 188,119 };
+	for (std::list<DataType>::iterator it = list.begin(); it != list.end(); it++)
+	{
+		cout << *it << tab;
+	}
+	cout << endl;
+	int index;
+	int value;
+	cout << "Введите индекс добавляемого элемента: "; cin >> index;
+	cout << "Введите значение добавляемого элемента: "; cin >> value;
+	std::list<DataType>::iterator it = list.begin();
+	if (index <DataType(list.size()))
+	{
+		advance(it, index); // iter += n; Random Access Iterators 
+		list.insert(it, value);
+	}
+	else cout << "Error: out of range! " << endl;
+	
+	do
+	{
+		cout << "Введите индекс удаляемого элемента: "; cin >> index;
+	} while (index >= list.size());
+
+	std::list<DataType>::iterator it1 = list.begin();
+	advance(it1, index);
+	list.erase(it1);
+	for (std::list<DataType>::iterator it = list.begin(); it != list.end(); it++)
+	{
+		cout << *it << tab;
+	}
+	cout << endl;
+
+
+
+#endif //LIST
+#ifdef LIST2
+	std::list<int>list = { 3,5,8,13,21 };
+	for (std::list<int>::iterator it = list.begin(); it != list.end(); ++it)
+	{
+		cout << *it << tab;
+	}
+	cout << endl;
+	int index;
+	int value;
+	cout << "Введите индекс добавляемого элемента: "; cin >> index;
+	cout << "Введите значение добавляемого элемента: "; cin >> value;
+	std::list<int> ::iterator position = list.begin();
+	/*for (int i = 0; i < index; i++)position++;*/
+	std::advance(position, index);
+	list.insert(position,value);
+	for (int i : list)cout << i << tab; cout << endl;
+#endif //LIST2
+
 }
+
+
